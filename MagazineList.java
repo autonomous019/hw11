@@ -8,6 +8,9 @@
 public class MagazineList 
 {
     private MagazineNode list;
+    private int listCount;
+    private MagazineNode head = null; 
+    private MagazineNode next; 
 
 
    //----------------------------------------------------------------
@@ -36,27 +39,44 @@ public class MagazineList
          current = list;
          while (current.next != null)
             current = current.next;
-         current.next = node;
+            current.next = node;
       }
    }
    
-   public void insert (Magazine mag)
-   {
+   
+   public void insert(Magazine mag) {
+       
+       MagazineNode node = new MagazineNode(mag);
+       MagazineNode current;
 
-      MagazineNode node = new MagazineNode (mag);
-      MagazineNode current;
+      
+       if (list == null) {
+           list = node;
+       }
 
-      if (list == null)
-         list = node;
-      else
-      {
-         current = list;
-         while (current.next != null)
-            current = current.next;
-         current.next = node;
-      }
+       current = list;
+       while (current.next != null) {
+           current = current.next;
+       }
+
+       //set the new node to the Object x, next will be null.
+       current.next = node;
+       
    }
+   
+ 
+   public void deleteAll ()
+   {
+	   if(list == null){
+		   //nothing to do
+	   } else {
+		   list = null;
+	   }
 
+
+   }
+   
+   
    //----------------------------------------------------------------
    //  Returns this list of magazines as a string.
    //----------------------------------------------------------------
@@ -74,8 +94,16 @@ public class MagazineList
 
       return result;
    }
-
-
+   public void setNextLink( MagazineNode next )  
+   {  
+     this.next = next;  
+   }  
+   
+   public MagazineNode getNextLink()  
+   {  
+     return next;  
+   } 
+ 
    
    //*****************************************************************
    //  An inner class that represents a node in the magazine list.
@@ -85,6 +113,7 @@ public class MagazineList
    {
       public Magazine magazine;
       public MagazineNode next;
+      public MagazineNode prev;
 
       //--------------------------------------------------------------
       //  Sets up the node
@@ -94,6 +123,9 @@ public class MagazineList
          magazine = mag;
          next = null;
       }
+      
+     
+      
    }
 }
 
